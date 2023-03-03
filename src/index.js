@@ -1,16 +1,16 @@
-const express = require('express')
-const mongoose = require('mongoose')
-const route = require("./route/route")
-const app = express()
+const express = require("express");
+const mongoose = require("mongoose");
+const route = require("./route/route");
+const app = express();
 
-app.use(express.json())
+app.use(express.json());
+require("dotenv").config();
 
-mongoose.connect("mongodb+srv://root:1234@suyashshendre.wfinbwt.mongodb.net/group52Database?retryWrites=true&w=majority", { useNewUrlParser: true })
-.then(() => console.log("MongoDb Connected..."))
-.catch(err => console.log(err))
+mongoose
+  .connect(process.env.MONGO_URL, { useNewUrlParser: true })
+  .then(() => console.log("MongoDb Connected..."))
+  .catch((err) => console.log(err));
 
-app.use("/",route)
+app.use("/", route);
 
-app.listen(3000, () =>
-    console.log("Express App Is Running On 3000.")
-)
+app.listen(3000, () => console.log("Express App Is Running On 3000."));
